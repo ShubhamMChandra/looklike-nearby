@@ -20,12 +20,18 @@ DEPENDENCIES:
 
 from datetime import datetime
 from enum import Enum
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from sqlalchemy import DateTime, Enum as SQLEnum, ForeignKey, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.database.config import Base
+
+if TYPE_CHECKING:
+    from .prospect import Prospect
+    from .campaign import Campaign
+    from .reference_client import ReferenceClient
+    from .interaction import Interaction
 
 
 class ReferralStatus(str, Enum):
