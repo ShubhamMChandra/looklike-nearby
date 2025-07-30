@@ -1,3 +1,4 @@
+# Explicitly specify Python runtime
 [phases.setup]
 nixPkgs = ["python311", "postgresql"]
 
@@ -9,3 +10,7 @@ cmds = ["echo 'Build phase complete'"]
 
 [start]
 cmd = "python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
+
+# Force Python detection
+[variables]
+NIXPACKS_NODE_VERSION = "none"
