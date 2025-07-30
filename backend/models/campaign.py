@@ -78,6 +78,11 @@ class Campaign(Base):
         back_populates="campaign",
         cascade="all, delete-orphan"
     )
+    interactions: Mapped[list["Interaction"]] = relationship(
+        "Interaction",
+        back_populates="campaign",
+        cascade="all, delete-orphan"
+    )
     
     def __repr__(self) -> str:
         return f"<Campaign(id={self.id}, name='{self.name}')>"
