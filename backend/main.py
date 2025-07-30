@@ -67,9 +67,9 @@ app = FastAPI(
 # CORS middleware for frontend integration
 origins = [
     "http://localhost:3000",  # Next.js dev server
-    "https://looklike-nearby-fmkbbxger-sam-chands-projects.vercel.app",  # Current Vercel deployment
-    "https://looklike-nearby-59lwmkvzw-sam-chands-projects.vercel.app",  # Previous Vercel deployment
-    "https://looklike-nearby-p05cj6mj7-sam-chands-projects.vercel.app",  # Previous Vercel deployment
+    "https://looklike-nearby-2q3i37tic-sam-chands-projects.vercel.app",  # Current Vercel deployment
+    "https://looklike-nearby-r69b72azc-sam-chands-projects.vercel.app",  # Previous Vercel deployment
+    "https://looklike-nearby-cyavq07wp-sam-chands-projects.vercel.app",  # Previous Vercel deployment
     os.getenv("FRONTEND_URL", "http://localhost:3000"),  # Environment-based URL
 ]
 
