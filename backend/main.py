@@ -67,21 +67,18 @@ app = FastAPI(
 # CORS middleware for frontend integration
 origins = [
     "http://localhost:3000",  # Next.js dev server
-    "https://looklike-nearby-2q3i37tic-sam-chands-projects.vercel.app",  # Current Vercel deployment
-    "https://looklike-nearby-r69b72azc-sam-chands-projects.vercel.app",  # Previous Vercel deployment
-    "https://looklike-nearby-cyavq07wp-sam-chands-projects.vercel.app",  # Previous Vercel deployment
+    "http://localhost:3001",  # Alternative dev ports
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+    "https://*.v0.dev",  # V0 development domains
     os.getenv("FRONTEND_URL", "http://localhost:3000"),  # Environment-based URL
 ]
 
-# In production, never use wildcard origins when credentials are included
-# Only allow specific origins for security and CORS compliance
-debug_mode = os.getenv("DEBUG", "false").lower() == "true"
-if debug_mode:
-    # Even in debug mode, don't use wildcard with credentials
+# In production, allow V0 domains
+if os.getenv("ALLOW_V0", "true").lower() == "true":
     origins.extend([
-        "http://localhost:3001",  # Alternative dev ports
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
+        "https://*.vercel.app",  # V0 preview domains
+        "https://*.v0.dev",      # V0 development domains
     ])
 
 app.add_middleware(
