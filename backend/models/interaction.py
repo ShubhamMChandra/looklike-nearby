@@ -128,15 +128,15 @@ class Interaction(Base):
         nullable=False
     )
     
-    # Relationships - temporarily disabled to fix initialization issues
-    # prospect: Mapped["Prospect"] = relationship(
-    #     "Prospect",
-    #     back_populates="interactions"
-    # )
-    # campaign: Mapped[Optional["Campaign"]] = relationship(
-    #     "Campaign",
-    #     back_populates="interactions"
-    # )
+    # Relationships
+    prospect: Mapped["Prospect"] = relationship(
+        "Prospect",
+        back_populates="interactions"
+    )
+    campaign: Mapped[Optional["Campaign"]] = relationship(
+        "Campaign",
+        back_populates="interactions"
+    )
     
     def __repr__(self) -> str:
         return f"<Interaction(id={self.id}, type='{self.type}', prospect_id={self.prospect_id})>"

@@ -122,22 +122,21 @@ class Prospect(Base):
         back_populates="prospect",
         cascade="all, delete-orphan"
     )
-    # Temporarily disabled to fix initialization issues
-    # interactions: Mapped[list["Interaction"]] = relationship(
-    #     "Interaction",
-    #     back_populates="prospect",
-    #     cascade="all, delete-orphan"
-    # )
-    # referrals: Mapped[list["Referral"]] = relationship(
-    #     "Referral",
-    #     back_populates="prospect",
-    #     cascade="all, delete-orphan"
-    # )
-    # template_usage: Mapped[list["EmailTemplateUsage"]] = relationship(
-    #     "EmailTemplateUsage",
-    #     back_populates="prospect",
-    #     cascade="all, delete-orphan"
-    # )
+    interactions: Mapped[list["Interaction"]] = relationship(
+        "Interaction",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
+    referrals: Mapped[list["Referral"]] = relationship(
+        "Referral",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
+    template_usage: Mapped[list["EmailTemplateUsage"]] = relationship(
+        "EmailTemplateUsage",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
     
     def __repr__(self) -> str:
         return f"<Prospect(id={self.id}, name='{self.name}', place_id='{self.place_id}')>" 
