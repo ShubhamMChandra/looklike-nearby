@@ -17,7 +17,7 @@ DEPENDENCIES:
 
 from .campaign import Campaign, CampaignProspect
 from .email_template import EmailTemplate, EmailTemplateUsage
-from .interaction import Interaction
+# from .interaction import Interaction  # Temporarily disabled
 from .prospect import Prospect
 from .reference_client import ReferenceClient
 from .referral import Referral, ReferralInteraction
@@ -29,7 +29,7 @@ __all__ = [
     "Campaign",
     "Prospect",
     "CampaignProspect",
-    "Interaction",
+    # "Interaction",  # Temporarily disabled
     "Referral",
     "ReferralInteraction",
     "EmailTemplate",
