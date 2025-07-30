@@ -1,44 +1,36 @@
-# LookLike Nearby - Next.js Frontend
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This is the Next.js frontend for the LookLike Nearby B2B lead generation platform.
+## Getting Started
 
-## Deployment Instructions
+First, run the development server:
 
-### Deploy Backend to Railway
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-1. Push your code to GitHub
-2. Create a new project on [Railway](https://railway.app)
-3. Connect your GitHub repository
-4. Railway will automatically detect the Python backend
-5. Add PostgreSQL database from Railway's marketplace
-6. Set environment variables:
-   - `GOOGLE_API_KEY` - Your Google Maps API key
-   - `APP_PASSWORD` - Your chosen password
-   - `SECRET_KEY` - A random secret key
-   - `FRONTEND_URL` - Your Vercel frontend URL (after deployment)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Deploy Frontend to Vercel
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. Install Vercel CLI: `npm i -g vercel`
-2. Navigate to the frontend-next directory: `cd frontend-next`
-3. Run: `vercel`
-4. Follow the prompts to link to your Vercel account
-5. Set environment variables in Vercel dashboard:
-   - `NEXT_PUBLIC_API_URL` - Your Railway backend URL
-   - `NEXT_PUBLIC_GOOGLE_MAPS_KEY` - Your Google Maps API key
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Local Development
+## Learn More
 
-1. Install dependencies: `npm install`
-2. Copy environment variables: `cp .env.local.example .env.local`
-3. Update `.env.local` with your backend URL
-4. Run development server: `npm run dev`
-5. Open [http://localhost:3000](http://localhost:3000)
+To learn more about Next.js, take a look at the following resources:
 
-## Features
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Password-based authentication
-- Reference client management
-- Business search with radius filtering
-- Campaign organization
-- Responsive design with Tailwind CSS
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
