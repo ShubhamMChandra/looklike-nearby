@@ -65,6 +65,31 @@ class Prospect(Base):
     website: Mapped[Optional[str]] = mapped_column(String(500))
     email: Mapped[Optional[str]] = mapped_column(String(255))
     
+    # Additional CRM contact fields
+    primary_contact_name: Mapped[Optional[str]] = mapped_column(String(255))
+    primary_contact_title: Mapped[Optional[str]] = mapped_column(String(255))
+    primary_contact_email: Mapped[Optional[str]] = mapped_column(String(255))
+    primary_contact_phone: Mapped[Optional[str]] = mapped_column(String(50))
+    secondary_contact_name: Mapped[Optional[str]] = mapped_column(String(255))
+    secondary_contact_title: Mapped[Optional[str]] = mapped_column(String(255))
+    secondary_contact_email: Mapped[Optional[str]] = mapped_column(String(255))
+    secondary_contact_phone: Mapped[Optional[str]] = mapped_column(String(50))
+    
+    # Company information
+    employee_count: Mapped[Optional[int]] = mapped_column(Integer)
+    annual_revenue: Mapped[Optional[float]] = mapped_column(Float)
+    year_founded: Mapped[Optional[int]] = mapped_column(Integer)
+    linkedin_url: Mapped[Optional[str]] = mapped_column(String(500))
+    facebook_url: Mapped[Optional[str]] = mapped_column(String(500))
+    twitter_url: Mapped[Optional[str]] = mapped_column(String(500))
+    
+    # Sales information
+    lead_source: Mapped[Optional[str]] = mapped_column(String(100))
+    lead_score: Mapped[Optional[int]] = mapped_column(Integer)
+    estimated_value: Mapped[Optional[float]] = mapped_column(Float)
+    next_follow_up: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    last_contacted: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    
     # Google Places metadata
     rating: Mapped[Optional[float]] = mapped_column(Float)
     price_level: Mapped[Optional[int]] = mapped_column(Integer)
@@ -94,6 +119,21 @@ class Prospect(Base):
     # Relationships
     campaign_prospects: Mapped[list["CampaignProspect"]] = relationship(
         "CampaignProspect",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
+    interactions: Mapped[list["Interaction"]] = relationship(
+        "Interaction",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
+    referrals: Mapped[list["Referral"]] = relationship(
+        "Referral",
+        back_populates="prospect",
+        cascade="all, delete-orphan"
+    )
+    template_usage: Mapped[list["EmailTemplateUsage"]] = relationship(
+        "EmailTemplateUsage",
         back_populates="prospect",
         cascade="all, delete-orphan"
     )

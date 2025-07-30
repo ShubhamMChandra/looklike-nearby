@@ -10,9 +10,12 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
+# Create non-root user
+RUN useradd --create-home --shell /bin/bash app
+
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir --user -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Production stage
 FROM python:3.11-slim
@@ -25,8 +28,11 @@ RUN apt-get update && apt-get install -y \
     libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
+# Create non-root user
+RUN useradd --create-home --shell /bin/bash app
+
 # Copy Python dependencies from builder stage
-COPY --from=builder /root/.local /root/.local
+COPY --from=builder /usr/local /usr/local
 
 # Copy application code
 COPY . .
@@ -34,19 +40,16 @@ COPY . .
 # Make sure scripts are executable
 RUN chmod +x run.py
 
-# Create non-root user
-RUN useradd --create-home --shell /bin/bash app
+# Set ownership of the application directory
+RUN chown -R app:app /app
+
 USER app
 
-# Set PATH to include local Python packages
-ENV PATH=/root/.local/bin:$PATH
-
 # Expose port
-EXPOSE 8000
+EXPOSE 8080
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+# Set default port
+ENV PORT=8080
 
 # Run the application
-CMD ["python", "-m", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT

@@ -41,13 +41,19 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     during shutdown.
     """
     # Startup: Initialize database tables
-    await init_db()
-    print("Database initialized successfully")
+    try:
+        print("🔧 Initializing database connection...")
+        await init_db()
+        print("✅ Database initialized successfully")
+    except Exception as e:
+        print(f"❌ Database initialization failed: {e}")
+        print("⚠️  Application will start but database features may not work")
+        # Don't fail startup - let the app start even if DB is not ready
     
     yield
     
     # Shutdown: Cleanup tasks
-    print("Application shutting down")
+    print("👋 Application shutting down")
 
 
 # Create FastAPI application
@@ -61,7 +67,8 @@ app = FastAPI(
 # CORS middleware for frontend integration
 origins = [
     "http://localhost:3000",  # Next.js dev server
-    "https://*.vercel.app",  # Vercel preview deployments
+    "https://*.vercel.app",   # Vercel preview deployments
+    "https://*.vercel.com",   # Vercel production deployments
     os.getenv("FRONTEND_URL", "http://localhost:3000"),  # Environment-based URL
 ]
 
