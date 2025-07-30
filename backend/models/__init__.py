@@ -16,9 +16,11 @@ DEPENDENCIES:
 """
 
 from .campaign import Campaign, CampaignProspect
+from .email_template import EmailTemplate, EmailTemplateUsage
 from .interaction import Interaction
 from .prospect import Prospect
 from .reference_client import ReferenceClient
+from .referral import Referral, ReferralInteraction
 from .search_history import SearchHistory
 
 __all__ = [
@@ -28,4 +30,8 @@ __all__ = [
     "Prospect",
     "CampaignProspect",
     "Interaction",
+    "Referral",
+    "ReferralInteraction",
+    "EmailTemplate",
+    "EmailTemplateUsage",
 ] 
