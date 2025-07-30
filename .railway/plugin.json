@@ -1,0 +1,63 @@
+{
+  "name": "LookLike Nearby",
+  "description": "B2B lead generation platform for finding similar businesses",
+  "icon": "🎯",
+  "tags": ["python", "fastapi", "postgresql", "lead-generation"],
+  "services": {
+    "backend": {
+      "name": "API Backend",
+      "icon": "⚡",
+      "domains": true,
+      "healthcheck": true,
+      "envVars": [
+        {
+          "name": "GOOGLE_API_KEY",
+          "description": "Google Maps Platform API key",
+          "required": true
+        },
+        {
+          "name": "APP_PASSWORD",
+          "description": "Application access password",
+          "required": true
+        },
+        {
+          "name": "FRONTEND_URL",
+          "description": "Vercel frontend URL",
+          "required": false
+        },
+        {
+          "name": "DEBUG",
+          "description": "Enable debug mode",
+          "default": "false",
+          "required": false
+        }
+      ]
+    },
+    "database": {
+      "name": "PostgreSQL Database",
+      "icon": "🗄️",
+      "type": "postgresql",
+      "domains": false,
+      "envVars": [
+        {
+          "name": "POSTGRES_DB",
+          "description": "Database name",
+          "default": "looklike_nearby",
+          "required": true
+        }
+      ]
+    }
+  },
+  "buttons": [
+    {
+      "name": "View API Docs",
+      "url": "https://${RAILWAY_DOMAIN}/docs",
+      "icon": "📚"
+    },
+    {
+      "name": "Health Check",
+      "url": "https://${RAILWAY_DOMAIN}/health",
+      "icon": "💚"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "services": {
+    "backend": {
+      "port": 8000,
+      "envVars": {
+        "DEBUG": "true",
+        "FRONTEND_URL": "http://localhost:3000"
+      }
+    },
+    "database": {
+      "port": 5432,
+      "envVars": {
+        "POSTGRES_DB": "looklike_nearby_dev"
+      }
+    }
+  }
+}
