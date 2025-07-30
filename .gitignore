@@ -1,0 +1,94 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs and temp files
+logs/
+*.log
+temp/
+tmp/
+
+# Docker
+.dockerignore
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Deployment
+railway.json
+
+# MyPy type checker
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Important: Always track these files (use ! to override ignores)
+!requirements.txt
+!setup.py
+!run.py
+!deploy.sh
+!Dockerfile
+!docker-compose.yml
+!README.md
+!PROJECT_STATUS.md
+!env.example
+!.cursor/
+!backend/
+!frontend/
+!leadgen/ 
