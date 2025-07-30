@@ -1,0 +1,23 @@
+# Ignore frontend files
+frontend/
+frontend-nextjs/
+node_modules/
+
+# Ignore development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.env.*
+
+# Ignore git files
+.git/
+.gitignore
+
+# Ignore test files
+tests/
+*.test.*
