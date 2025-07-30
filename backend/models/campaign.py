@@ -31,6 +31,7 @@ from backend.database.config import Base
 if TYPE_CHECKING:
     from .prospect import Prospect
     from .reference_client import ReferenceClient
+    from .interaction import Interaction
 
 
 class ProspectStatus(str, Enum):
