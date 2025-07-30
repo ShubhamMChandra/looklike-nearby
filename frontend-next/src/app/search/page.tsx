@@ -14,10 +14,15 @@ export default function SearchPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [prospects, setProspects] = useState<Prospect[]>([]);
   const [searchParams, setSearchParams] = useState({
-    reference_client_id: '',
-    search_terms: '',
+    reference_client_id: undefined as number | undefined,
     radius_meters: 5000,
-    custom_address: ''
+    custom_address: '',
+    filters: {
+      business_type: '',
+      min_rating: undefined as number | undefined,
+      max_price_level: undefined as number | undefined,
+      open_now: undefined as boolean | undefined
+    }
   });
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -29,7 +34,7 @@ export default function SearchPage() {
         setProspects(response.data);
         toast.success(`Found ${response.data.length} prospects!`);
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to search for prospects');
     } finally {
       setIsLoading(false);
@@ -59,11 +64,14 @@ export default function SearchPage() {
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="search_terms">Search Terms</Label>
+                <Label htmlFor="business_type">Business Type</Label>
                 <Input
-                  id="search_terms"
-                  value={searchParams.search_terms}
-                  onChange={(e) => setSearchParams({ ...searchParams, search_terms: e.target.value })}
+                  id="business_type"
+                  value={searchParams.filters.business_type}
+                  onChange={(e) => setSearchParams({ 
+                    ...searchParams, 
+                    filters: { ...searchParams.filters, business_type: e.target.value }
+                  })}
                   placeholder="e.g., restaurant, law firm, etc."
                 />
               </div>

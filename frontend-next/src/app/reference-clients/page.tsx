@@ -31,7 +31,7 @@ export default function ReferenceClientsPage() {
       if (response.data) {
         setClients(response.data);
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to load reference clients');
     } finally {
       setIsLoading(false);
@@ -48,7 +48,7 @@ export default function ReferenceClientsPage() {
         setFormData({ name: '', address: '', business_type: '', notes: '' });
         loadClients();
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to add reference client');
     } finally {
       setIsAdding(false);

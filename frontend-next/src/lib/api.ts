@@ -106,8 +106,33 @@ class ApiClient {
 
   // Prospects & Search
   async searchProspects(params: SearchParams) {
-    const queryString = new URLSearchParams(params as Record<string, string>).toString();
-    return this.request<Prospect[]>(`/search?${queryString}`);
+    const queryParams = new URLSearchParams();
+    
+    if (params.reference_client_id) {
+      queryParams.append('reference_client_id', params.reference_client_id.toString());
+    }
+    if (params.radius_meters) {
+      queryParams.append('radius_meters', params.radius_meters.toString());
+    }
+    if (params.custom_address) {
+      queryParams.append('custom_address', params.custom_address);
+    }
+    if (params.filters) {
+      if (params.filters.business_type) {
+        queryParams.append('business_type', params.filters.business_type);
+      }
+      if (params.filters.min_rating) {
+        queryParams.append('min_rating', params.filters.min_rating.toString());
+      }
+      if (params.filters.max_price_level) {
+        queryParams.append('max_price_level', params.filters.max_price_level.toString());
+      }
+      if (params.filters.open_now) {
+        queryParams.append('open_now', params.filters.open_now.toString());
+      }
+    }
+    
+    return this.request<Prospect[]>(`/search?${queryParams.toString()}`);
   }
 
   async getProspect(id: number) {
