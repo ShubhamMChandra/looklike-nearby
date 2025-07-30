@@ -69,7 +69,7 @@ class SearchResponse(BaseModel):
     reference_client: Optional[dict] = None
 
 
-@router.post("/prospects", response_model=SearchResponse)
+@router.post("/", response_model=SearchResponse)
 async def search_prospects(
     search_request: SearchRequest,
     db: AsyncSession = Depends(get_db),

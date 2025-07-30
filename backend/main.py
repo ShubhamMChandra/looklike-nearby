@@ -130,12 +130,14 @@ from backend.api import (
     reference_clients_router,
     search_router,
 )
+from backend.api.stats import router as stats_router
 
 app.include_router(auth_router, prefix="/api/auth", tags=["authentication"])
 app.include_router(reference_clients_router, prefix="/api/reference-clients", tags=["reference-clients"])
 app.include_router(search_router, prefix="/api/search", tags=["search"])
 app.include_router(prospects_router, prefix="/api/prospects", tags=["prospects"])
 app.include_router(campaigns_router, prefix="/api/campaigns", tags=["campaigns"])
+app.include_router(stats_router, prefix="/api/stats", tags=["stats"])
 
 
 if __name__ == "__main__":

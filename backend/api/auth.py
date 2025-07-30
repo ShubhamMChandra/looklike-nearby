@@ -31,7 +31,8 @@ class LoginRequest(BaseModel):
 
 class LoginResponse(BaseModel):
     """Response model for successful login."""
-    session_token: str
+    access_token: str
+    token_type: str = "bearer"
     message: str
 
 
@@ -63,7 +64,7 @@ async def login(request: LoginRequest) -> LoginResponse:
         session_token = authenticate_password(credentials)
         
         return LoginResponse(
-            session_token=session_token,
+            access_token=session_token,
             message="Authentication successful"
         )
     except HTTPException:
@@ -102,4 +103,18 @@ async def validate_session(session_token: str = Depends(get_current_session)) ->
     Returns:
         Session validation response
     """
-    return {"valid": True, "session_token": session_token} 
+    return {"valid": True, "session_token": session_token}
+
+
+@router.get("/verify")
+async def verify_session(session_token: str = Depends(get_current_session)) -> dict:
+    """
+    Verify current session token (alias for validate).
+    
+    Args:
+        session_token: Current session token from dependency
+        
+    Returns:
+        Session verification response
+    """
+    return {"valid": True, "authenticated": True} 
