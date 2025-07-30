@@ -99,5 +99,8 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Test directories (experimental code)
 test-api/
 test-deploy/
+.vercel
