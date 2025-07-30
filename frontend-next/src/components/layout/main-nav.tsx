@@ -6,14 +6,16 @@ import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/lib/auth';
 
 export function MainNav() {
   const pathname = usePathname();
-  const { isAuthenticated, logout } = useAuth();
 
   const routes = [
+    {
+      href: '/',
+      label: 'Dashboard',
+      active: pathname === '/',
+    },
     {
       href: '/reference-clients',
       label: 'Reference Clients',
@@ -30,10 +32,6 @@ export function MainNav() {
       active: pathname === '/campaigns',
     },
   ];
-
-  if (!isAuthenticated) {
-    return null;
-  }
 
   return (
     <div className="flex items-center space-x-4 lg:space-x-6">
@@ -55,9 +53,6 @@ export function MainNav() {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-      <Button variant="ghost" onClick={logout}>
-        Logout
-      </Button>
     </div>
   );
 }
