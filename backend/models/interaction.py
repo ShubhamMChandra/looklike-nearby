@@ -31,6 +31,7 @@ from backend.database.config import Base
 if TYPE_CHECKING:
     from .prospect import Prospect
     from .campaign import Campaign
+    from .referral import Referral
 
 
 class InteractionType(str, Enum):
@@ -135,6 +136,11 @@ class Interaction(Base):
     )
     campaign: Mapped[Optional["Campaign"]] = relationship(
         "Campaign",
+        back_populates="interactions"
+    )
+    referrals: Mapped[list["Referral"]] = relationship(
+        "Referral",
+        secondary="referral_interactions",
         back_populates="interactions"
     )
     
