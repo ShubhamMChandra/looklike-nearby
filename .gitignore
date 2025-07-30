@@ -91,4 +91,13 @@ dmypy.json
 !.cursor/
 !backend/
 !frontend/
-!leadgen/ 
+!leadgen/
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+test-api/
+test-deploy/

@@ -206,9 +206,170 @@ All modules follow documentation standards with:
 
 ### Railway (Recommended)
 
-1. Connect GitHub repository to Railway
-2. Add environment variables in Railway dashboard
-3. Deploy automatically on git push
+#### Railway CLI Setup
+
+1. **Install Railway CLI**
+   ```bash
+   # Install globally via npm
+   npm install -g @railway/cli
+   
+   # Or via Homebrew (macOS)
+   brew install railway
+   ```
+
+2. **Login to Railway**
+   ```bash
+   railway login
+   ```
+
+3. **Initialize Railway Project**
+   ```bash
+   # Navigate to project root
+   cd looklike-nearby
+   
+   # Link to existing Railway project (if you have one)
+   railway link
+   
+   # Or create new project
+   railway init
+   ```
+
+4. **Add PostgreSQL Database**
+   ```bash
+   # Add PostgreSQL database to your project
+   railway add postgres
+   
+   # Link database to your application service
+   railway connect
+   ```
+
+5. **Set Environment Variables**
+   ```bash
+   # Set database URL (Railway will provide this)
+   railway variables set DATABASE_URL="postgresql+asyncpg://user:password@host:port/database"
+   
+   # Set Google Maps API key
+   railway variables set GOOGLE_API_KEY="your-google-maps-api-key"
+   
+   # Set application password
+   railway variables set APP_PASSWORD="your-secure-password"
+   
+   # Set debug mode (optional)
+   railway variables set DEBUG="false"
+   ```
+
+6. **Deploy to Railway**
+   ```bash
+   # Deploy current branch
+   railway up
+   
+   # Deploy specific branch
+   railway up --branch main
+   
+   # View deployment logs
+   railway logs
+   
+   # Check deployment status
+   railway status
+   ```
+
+#### Railway Project Management
+
+```bash
+# View all projects
+railway projects
+
+# Switch between projects
+railway project
+
+# View project details
+railway project --show
+
+# List all services in project
+railway services
+
+# View service logs
+railway logs --service backend
+
+# Open Railway dashboard
+railway open
+
+# View environment variables
+railway variables
+
+# Add new environment variable
+railway variables set VARIABLE_NAME="value"
+
+# Remove environment variable
+railway variables unset VARIABLE_NAME
+```
+
+#### Railway Database Management
+
+```bash
+# Connect to PostgreSQL database
+railway connect
+
+# View database connection info
+railway variables get DATABASE_URL
+
+# Open database in Railway dashboard
+railway open --service postgres
+
+# Run database migrations (if needed)
+railway run python -m alembic upgrade head
+```
+
+#### Railway Troubleshooting
+
+```bash
+# Check service health
+railway status
+
+# View detailed logs
+railway logs --follow
+
+# Restart service
+railway restart
+
+# Scale service (if needed)
+railway scale 1
+
+# View service metrics
+railway metrics
+```
+
+#### Railway Configuration Files
+
+The project includes these Railway-specific files:
+
+- **`railway.toml`**: Railway deployment configuration
+- **`Dockerfile`**: Container configuration for Railway
+- **`Procfile`**: Process definition for Railway
+
+#### Railway Deployment Best Practices
+
+1. **Environment Variables**: Always use Railway's environment variable system
+2. **Database**: Use Railway's managed PostgreSQL for production
+3. **Logs**: Monitor logs regularly with `railway logs --follow`
+4. **Health Checks**: The app includes `/health` endpoint for monitoring
+5. **Auto-deploy**: Connect GitHub repo for automatic deployments
+
+#### Railway vs Manual Deployment
+
+**Railway Advantages:**
+- ✅ Managed PostgreSQL database
+- ✅ Automatic HTTPS/SSL
+- ✅ Built-in monitoring and logs
+- ✅ Easy environment variable management
+- ✅ Automatic deployments from Git
+- ✅ No server management required
+
+**Manual Deployment:**
+- ❌ Requires server setup and maintenance
+- ❌ Manual database management
+- ❌ SSL certificate configuration
+- ❌ Server monitoring and updates
 
 ### Docker
 
@@ -273,6 +434,65 @@ gunicorn backend.main:app -w 4 -k uvicorn.workers.UvicornWorker
 3. **Follow code standards**: Use the documentation format in `.cursor/claude_rules.md`
 4. **Test thoroughly**: Ensure all functionality works
 5. **Submit pull request**: Include description of changes
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### Network Error on Frontend Login
+
+If you encounter "Network error occurred" when logging in from the Vercel frontend:
+
+1. **Check CORS Configuration**
+   ```bash
+   # Verify Railway backend CORS settings
+   railway logs --service backend
+   ```
+
+2. **Update CORS Origins**
+   - Add your Vercel domain to Railway backend CORS configuration
+   - Update `backend/main.py` origins list with your Vercel URL
+
+3. **Verify Environment Variables**
+   ```bash
+   # Check Railway environment variables
+   railway variables
+   
+   # Ensure DATABASE_URL is set correctly
+   railway variables get DATABASE_URL
+   ```
+
+4. **Test Backend Health**
+   ```bash
+   # Check if backend is responding
+   curl https://your-railway-app.up.railway.app/health
+   ```
+
+#### Database Connection Issues
+
+```bash
+# Check database connection
+railway connect
+
+# View database logs
+railway logs --service postgres
+
+# Restart database service
+railway restart --service postgres
+```
+
+#### Deployment Failures
+
+```bash
+# View deployment logs
+railway logs --follow
+
+# Check service status
+railway status
+
+# Restart service
+railway restart
+```
 
 ## 📞 Support
 

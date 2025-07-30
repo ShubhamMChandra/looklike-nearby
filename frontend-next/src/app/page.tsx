@@ -6,9 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/lib/auth';
+import { Toaster, toast } from 'sonner';
 
 export default function LoginPage() {
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { login, isAuthenticated, error } = useAuth();
   const router = useRouter();
 
@@ -18,13 +20,27 @@ export default function LoginPage() {
     }
   }, [isAuthenticated, router]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(password);
+    setIsLoading(true);
+    try {
+      await login(password);
+    } catch (err) {
+      toast.error('Failed to login. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+      <Toaster position="top-center" />
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Welcome to LookLike Nearby</CardTitle>
@@ -40,13 +56,11 @@ export default function LoginPage() {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
               />
-              {error && (
-                <p className="text-sm text-red-500">{error}</p>
-              )}
             </div>
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </CardContent>

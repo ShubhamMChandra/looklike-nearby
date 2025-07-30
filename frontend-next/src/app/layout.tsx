@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/lib/auth';
 import { MainNav } from '@/components/layout/main-nav';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,12 +28,13 @@ export default function RootLayout({
               </div>
             </header>
             <main className="flex-1">
-              <div className="container py-6">
-                {children}
-              </div>
-            </main>
+                        <div className="container py-6">
+            {children}
           </div>
-        </AuthProvider>
+        </main>
+        <Toaster />
+      </div>
+    </AuthProvider>
       </body>
     </html>
   );
