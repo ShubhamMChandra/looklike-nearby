@@ -15,15 +15,23 @@ DEPENDENCIES:
 - All model classes from individual model files
 """
 
-from .campaign import Campaign, CampaignProspect
-from .prospect import Prospect
 from .reference_client import ReferenceClient
 from .search_history import SearchHistory
+from .interaction import Interaction
+from .referral import Referral, ReferralInteraction
+from .email_template import EmailTemplate, EmailTemplateUsage
+from .prospect import Prospect
+from .campaign import Campaign, CampaignProspect
 
 __all__ = [
     "ReferenceClient",
-    "SearchHistory", 
-    "Campaign",
+    "SearchHistory",
+    "Interaction",
+    "Referral",
+    "ReferralInteraction",
+    "EmailTemplate",
+    "EmailTemplateUsage",
     "Prospect",
+    "Campaign",
     "CampaignProspect",
 ] 
