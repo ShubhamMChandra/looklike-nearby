@@ -1,0 +1,43 @@
+Flask>=2.3
+FastAPI>=0.104.0
+uvicorn[standard]>=0.24.0
+requests
+pandas
+numpy
+simple-salesforce
+geopy
+fuzzywuzzy
+python-Levenshtein
+pillow
+opencv-python-headless
+folium
+tqdm
+
+# Database
+SQLAlchemy>=2.0.0
+alembic
+psycopg2-binary
+asyncpg
+
+# Authentication & Security
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+
+# Validation
+pydantic>=2.0.0
+email-validator
+
+# PDF Generation
+reportlab
+matplotlib
+
+# Frontend (if serving static files)
+jinja2
+
+# Development
+pytest
+pytest-asyncio
+black
+flake8
+mypy 
