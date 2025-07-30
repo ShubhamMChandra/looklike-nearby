@@ -16,6 +16,7 @@ DEPENDENCIES:
 """
 
 from .campaign import Campaign, CampaignProspect
+from .interaction import Interaction
 from .prospect import Prospect
 from .reference_client import ReferenceClient
 from .search_history import SearchHistory
@@ -26,4 +27,5 @@ __all__ = [
     "Campaign",
     "Prospect",
     "CampaignProspect",
+    "Interaction",
 ] 
